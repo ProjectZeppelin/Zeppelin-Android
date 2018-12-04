@@ -13,8 +13,7 @@ public class GetMenu extends AsyncTask<String, Void, String> {
   private WeakReference<TextView> mTitleText;
   private WeakReference<Menu> mList;
 
-  GetMenu(TextView titleView, Menu list) {
-    this.mTitleText = new WeakReference<>(titleView);
+  GetMenu(Menu list) {
     this.mList = new WeakReference<>(list);
   }
 
@@ -41,7 +40,5 @@ public class GetMenu extends AsyncTask<String, Void, String> {
     } catch (Exception e) {
       e.printStackTrace();
     }
-
-    mTitleText.get().setText(result);
   }
 }

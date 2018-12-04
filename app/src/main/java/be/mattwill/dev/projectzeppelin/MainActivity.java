@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity
     Menu menu = navView.getMenu();
     Menu submenu = menu.addSubMenu("A Very Beautiful Menu");
 
-    new GetMenu((TextView) findViewById(R.id.batat), menu).execute("http://172.16.146.145:3001/menu");
+    new GetMenu(menu).execute("http://172.16.146.145:3001/menu");
 
     navView.invalidate();
   }
