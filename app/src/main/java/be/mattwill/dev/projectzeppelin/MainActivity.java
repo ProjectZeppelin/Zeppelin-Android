@@ -13,8 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import java.io.Console;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -62,9 +61,7 @@ public class MainActivity extends AppCompatActivity
     Menu menu = navView.getMenu();
     Menu submenu = menu.addSubMenu("A Very Beautiful Menu");
 
-    for (String item : menuItems) {
-      submenu.add(item);
-    }
+    new GetMenu((TextView) findViewById(R.id.batat), menu).execute("http://172.16.146.145:3001/menu");
 
     navView.invalidate();
   }
