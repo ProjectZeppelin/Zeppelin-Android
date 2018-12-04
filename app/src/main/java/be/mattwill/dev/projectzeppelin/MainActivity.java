@@ -106,6 +106,9 @@ public class MainActivity extends AppCompatActivity
 
 
     Log.d(TAG, item.getTitle().toString());
+    TextView view = (TextView) findViewById(R.id.batat);
+    view.setText(item.getTitle().toString());
+
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
