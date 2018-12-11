@@ -13,18 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
   public static final String TAG = "MainActivity_mat";
-
-  String[] menuItems = {
-          "Javascript",
-          "Java",
-          "C#"
-  };
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +48,7 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
     addMenuItemInNavMenuDrawer();
+
   }
 
   private void addMenuItemInNavMenuDrawer() {
@@ -61,7 +57,7 @@ public class MainActivity extends AppCompatActivity
     Menu menu = navView.getMenu();
     Menu submenu = menu.addSubMenu("A Very Beautiful Menu");
 
-    new GetMenu(menu).execute("http://172.16.146.145:3001/menu");
+    new GetMenu(menu).execute("http://172.16.155.28:3001/menu");
 
     navView.invalidate();
   }
@@ -98,7 +94,6 @@ public class MainActivity extends AppCompatActivity
     return super.onOptionsItemSelected(item);
   }
 
-  @SuppressWarnings("StatementWithEmptyBody")
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
     // Handle navigation view item clicks here.
@@ -106,8 +101,10 @@ public class MainActivity extends AppCompatActivity
 
 
     Log.d(TAG, item.getTitle().toString());
-    TextView view = (TextView) findViewById(R.id.batat);
-    view.setText(item.getTitle().toString());
+    LinearLayout layout = findViewById(R.id.mainConstraint);
+
+
+    new GetLanguage(layout, this).execute("http://172.16.155.28:3001/language/" + item.getTitle().toString().toLowerCase());
 
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
