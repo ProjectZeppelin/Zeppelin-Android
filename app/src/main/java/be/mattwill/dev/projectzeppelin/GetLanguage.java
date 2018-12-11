@@ -1,6 +1,8 @@
 package be.mattwill.dev.projectzeppelin;
 
 import android.os.AsyncTask;
+import android.util.Base64;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -57,12 +59,14 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
 
           TextView Title = new TextView(mActivity.get());
           TextView Subtitle = new TextView(mActivity.get());
-          TextView Gist = new TextView(mActivity.get());
+          WebView Gist = new WebView(mActivity.get());
 
           Title.setText(title);
+          Title.setTextSize(25);
           Subtitle.setText(subtitle);
-          Gist.setText(gist);
-
+          Gist.getSettings().setJavaScriptEnabled(true);
+          String script = "<html><body><script src=\"" + gist  + "\"></script></body></html>";
+          Gist.loadData(script, "text/html", "UTF-8");
           mLayout.get().addView(Title);
           mLayout.get().addView(Subtitle);
           mLayout.get().addView(Gist);
