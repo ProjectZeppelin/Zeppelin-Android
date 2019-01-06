@@ -76,6 +76,7 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
           mLayout.get().addView(Subtitle);
           mLayout.get().addView(Gist);
 
+
         }
 
       }
