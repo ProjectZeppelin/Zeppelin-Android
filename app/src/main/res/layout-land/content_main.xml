@@ -4,46 +4,68 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_marginTop="@dimen/Scrollview_Landscape">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/mainConstraint"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="@dimen/nav_title_vertical_spacing"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".MainActivity"
-        tools:showIn="@layout/app_bar_main">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/mainConstraint"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="@dimen/nav_title_vertical_spacing"
+            android:layout_marginTop="@dimen/nav_title_vertical_spacing"
+            android:layout_marginRight="@dimen/nav_title_vertical_spacing"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context=".MainActivity"
+            tools:showIn="@layout/app_bar_main">
 
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_logo" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/ic_logo" />
 
-        <TextView
-            android:id="@+id/ProjectTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:fontFamily="@font/roboto_thin"
-            android:paddingTop="@dimen/nav_title_vertical_spacing"
-            android:text="@string/ProjectTitle"
-            android:textSize="36sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/ProjectTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/roboto_thin"
+                android:paddingTop="@dimen/nav_title_vertical_spacing"
+                android:text="@string/ProjectTitle"
+                android:textSize="36sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/ProjectSubtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:fontFamily="@font/roboto_thin"
-            android:paddingTop="@dimen/nav_title_vertical_spacing"
-            android:text="@string/ProjectSubtitle"
-            android:textSize="24sp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/ProjectSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/roboto_thin"
+                android:paddingTop="@dimen/nav_title_vertical_spacing"
+                android:text="@string/ProjectSubtitle"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="false"
+            android:layout_marginTop="100dp"
+            android:foregroundGravity="center_horizontal"
+            android:indeterminateTint="@color/colorPrimaryDark"
+            android:maxHeight="150dp"
+            android:minHeight="150dp"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:visibility="gone" />
+
+</RelativeLayout>
 </ScrollView>

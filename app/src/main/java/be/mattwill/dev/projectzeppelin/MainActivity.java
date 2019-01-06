@@ -58,9 +58,6 @@ public class MainActivity extends AppCompatActivity
         setContent(m_url);
     }
 
-    spinner = (ProgressBar)findViewById(R.id.progressBar1);
-
-
   }
 
   // populate our navigation drawer based on a Get request

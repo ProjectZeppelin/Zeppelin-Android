@@ -111,9 +111,9 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
     try {
       Log.i("parsed", s);
       JSONArray languages = new JSONArray(s);
+      Log.i("parsed", Integer.toString(languages.length()));
 
       mSpinner.get().setVisibility(View.VISIBLE);
-
       // generate a new code snippet for each part of our language
       for (int i = 0; i < languages.length(); i++) {
         String val = languages.getJSONObject(i).getString("data");
@@ -178,6 +178,7 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
       mLayout.get().removeAllViews();
       displayError();
       e.printStackTrace();
+      Log.i("parsed", e.getMessage());
     }
   }
 
