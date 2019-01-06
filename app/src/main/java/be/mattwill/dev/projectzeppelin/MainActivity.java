@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity
   public static final String TAG = "MainActivity_mat";
   // the last url we used to list our application data
   private String m_url = "";
+  // if our previous url is the same as the current then we don't have to load any data in
+  private String m_prevurl = "";
 
   // loading bar when we are waiting for the webviews to load
   private ProgressBar spinner;
@@ -110,7 +112,10 @@ public class MainActivity extends AppCompatActivity
 
     m_url = "http://" +  getString(R.string.IP) + ":" + getString(R.string.PORT) + "/language/" + language;
 
-    setContent(m_url);
+    if(!m_prevurl.equals(m_url)) {
+      setContent(m_url);
+      m_prevurl = m_url;
+    }
 
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
