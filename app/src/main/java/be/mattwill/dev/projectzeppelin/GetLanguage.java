@@ -70,7 +70,9 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
           Title.setTextSize(25);
           Subtitle.setText(subtitle);
           Gist.getSettings().setJavaScriptEnabled(true);
-          String script = "<html><body><script src=\"" + gist  + "\"></script></body></html>";
+          String script = "<html><body><script src=\"" + gist  + "\"></script><script>\n" +
+                  "        document.querySelector(\".gist-meta\").style.display = \"none\";\n" +
+                  "    </script></body></html>";
           Gist.loadData(script, "text/html", "UTF-8");
           mLayout.get().addView(Title);
           mLayout.get().addView(Subtitle);

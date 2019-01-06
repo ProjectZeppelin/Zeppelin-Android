@@ -10,4 +10,6 @@
     <string name="DataRetrieveError">Unable to retrieve language data</string>
     <string name="IP">aplearning.xyz</string>
     <string name="PORT">6000</string>
+    <string name="ProjectSubtitle">The next generation of cheating</string>
+    <string name="ProjectTitle">Project Zeppelin</string>
 </resources>

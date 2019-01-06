@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
   public static final String TAG = "MainActivity_mat";
+  // the last url we used to list our application data
+  private String m_url = "";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,15 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
     addMenuItemInNavMenuDrawer();
+
+    if(savedInstanceState != null){
+      String url = savedInstanceState.getString("url");
+      Log.i(TAG, url);
+      m_url = url;
+      // only change the content when we have a valid url
+      if(m_url != "")
+        setContent(m_url);
+    }
 
   }
 
@@ -70,22 +81,31 @@ public class MainActivity extends AppCompatActivity
     return true;
   }
 
+  private void setContent(String url){
+    Log.d(TAG, url);
+    LinearLayout layout = findViewById(R.id.mainConstraint);
+
+    new GetLanguage(layout, this).execute(m_url);
+  }
+
 
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
     // Handle navigation view item clicks here.
-    int id = item.getItemId();
 
+    m_url = "http://" +  getString(R.string.IP) + ":" + getString(R.string.PORT) +"/language/" + item.getTitle().toString().toLowerCase();
 
-    Log.d(TAG, item.getTitle().toString());
-    LinearLayout layout = findViewById(R.id.mainConstraint);
-
-
-    new GetLanguage(layout, this).execute("http://" +  getString(R.string.IP) + ":" + getString(R.string.PORT) +"/language/" + item.getTitle().toString().toLowerCase());
+    setContent(m_url);
 
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
+  }
+
+  @Override
+  public void onSaveInstanceState(Bundle savedInstanceState) {
+    super.onSaveInstanceState(savedInstanceState);
+    savedInstanceState.putString("url", m_url);
   }
 }
