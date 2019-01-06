@@ -30,14 +30,6 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
-    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
-      }
-    });
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -55,9 +47,9 @@ public class MainActivity extends AppCompatActivity
     NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
 
     Menu menu = navView.getMenu();
-    Menu submenu = menu.addSubMenu("A Very Beautiful Menu");
+    Menu submenu = menu.addSubMenu("Cheat sheet");
 
-    new GetMenu(menu).execute("http://172.16.160.107:3001/menu");
+    new GetMenu(menu).execute("http://" +  getString(R.string.IP) + ":" + getString(R.string.PORT) + "/menu");
     navView.invalidate();
   }
 
@@ -103,7 +95,7 @@ public class MainActivity extends AppCompatActivity
     LinearLayout layout = findViewById(R.id.mainConstraint);
 
 
-    new GetLanguage(layout, this).execute("http://172.16.155.28:3001/language/" + item.getTitle().toString().toLowerCase());
+    new GetLanguage(layout, this).execute("http://" +  getString(R.string.IP) + ":" + getString(R.string.PORT) +"/language/" + item.getTitle().toString().toLowerCase());
 
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -8,20 +8,22 @@ import org.json.JSONArray;
 
 import java.lang.ref.WeakReference;
 
+
 public class GetMenu extends AsyncTask<String, Void, String> {
 
-  private WeakReference<TextView> mTitleText;
   private WeakReference<Menu> mList;
 
   GetMenu(Menu list) {
     this.mList = new WeakReference<>(list);
   }
 
+  // Do a get request in another thread
   @Override
   protected String doInBackground(String... strings) {
     return GetRequest.get(strings[0]);
   }
 
+  // return a menu object after the get request
   @Override
   protected void onPostExecute (String s) {
     super.onPostExecute(s);

@@ -13,6 +13,7 @@ import java.net.URL;
 public class GetRequest {
   private static final String TAG = GetRequest.class.getSimpleName();
 
+  // basic rest GET request this should be executed on a thread that is not the UI thread
   static String get(String url) {
     HttpURLConnection connection = null;
     BufferedReader reader = null;
@@ -27,6 +28,7 @@ public class GetRequest {
       StringBuilder builder = new StringBuilder();
 
       String line;
+      // read the incoming packet and append it to the string builder
       while ((line = reader.readLine()) != null) {
         builder.append(line);
         builder.append("\n");
@@ -40,6 +42,7 @@ public class GetRequest {
     } catch (IOException e) {
       e.getStackTrace();
     } finally {
+      // always close the connection
       if (connection != null) {
         connection.disconnect();
       }
@@ -56,6 +59,7 @@ public class GetRequest {
     }else{
       Log.d(TAG, "Could not get result");
     }
+    // return the data or null otherwise
     return result;
   }
 }
