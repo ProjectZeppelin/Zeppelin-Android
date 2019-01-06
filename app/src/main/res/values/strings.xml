@@ -7,4 +7,6 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="DataRetrieveError">Unable to retrieve language data</string>
+    <string name="IP">aplearning.xyz</string>
+    <string name="PORT">6000</string>
 </resources>

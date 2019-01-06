@@ -29,6 +29,7 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
     return GetRequest.get(strings[0]);
   }
 
+
   protected void displayError(){
     TextView Error = new TextView(mActivity.get());
 
@@ -37,14 +38,18 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
 
     mLayout.get().addView(Error);
   }
+
+  // generate a new LinearLayout based on all the data from a new language
   @Override
   protected void onPostExecute (String s) {
     super.onPostExecute(s);
 
     String result = "";
 
+    // convert our result to a JSON array
     try {
       JSONArray languages = new JSONArray(s);
+      // generate a new code snippet for each part of our language
       for (int i = 0; i < languages.length(); i++) {
         String val = languages.getJSONObject(i).getString("data");
 
