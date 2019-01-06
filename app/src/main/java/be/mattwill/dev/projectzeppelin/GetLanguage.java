@@ -139,7 +139,7 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
 
 
           // alert the webview to use caching for extra speed
-          Gist.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+          Gist.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
 
           // make our title big
           Title.setText(title);
