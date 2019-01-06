@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
@@ -22,6 +23,9 @@ public class MainActivity extends AppCompatActivity
   public static final String TAG = "MainActivity_mat";
   // the last url we used to list our application data
   private String m_url = "";
+
+  // loading bar when we are waiting for the webviews to load
+  private ProgressBar spinner;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +36,7 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
-
+    // make our drawer without any data
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
             this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -52,8 +56,12 @@ public class MainActivity extends AppCompatActivity
         setContent(m_url);
     }
 
+    spinner = (ProgressBar)findViewById(R.id.progressBar1);
+
+
   }
 
+  // populate our navigation drawer based on a Get request
   private void addMenuItemInNavMenuDrawer() {
     NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
 
@@ -64,6 +72,7 @@ public class MainActivity extends AppCompatActivity
     navView.invalidate();
   }
 
+  // close our drawer if the user pressed the back button
   @Override
   public void onBackPressed() {
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -74,26 +83,32 @@ public class MainActivity extends AppCompatActivity
     }
   }
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.main, menu);
-    return true;
-  }
 
+  // generate our content based on the current language
   private void setContent(String url){
     Log.d(TAG, url);
     LinearLayout layout = findViewById(R.id.mainConstraint);
 
-    new GetLanguage(layout, this).execute(m_url);
+    new GetLanguage(layout, this, (ProgressBar) findViewById(R.id.progressBar1)).execute(m_url);
+  }
+
+  private String getlanguage(String language){
+    // urls don't like special characters convert the nececery languages to a url friendly version
+    if(language.equals("c#")) {
+      return "csharp";
+    }
+    return language;
   }
 
 
+  // we have pressed a item in our menu. Handle it and display the right content
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
     // Handle navigation view item clicks here.
 
-    m_url = "http://" +  getString(R.string.IP) + ":" + getString(R.string.PORT) +"/language/" + item.getTitle().toString().toLowerCase();
+    String language = getlanguage(item.getTitle().toString().toLowerCase());
+
+    m_url = "http://" +  getString(R.string.IP) + ":" + getString(R.string.PORT) + "/language/" + language;
 
     setContent(m_url);
 

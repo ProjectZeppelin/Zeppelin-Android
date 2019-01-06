@@ -15,6 +15,7 @@ public class GetRequest {
 
   // basic rest GET request this should be executed on a thread that is not the UI thread
   static String get(String url) {
+    Log.i(TAG, "Get request to " + url);
     HttpURLConnection connection = null;
     BufferedReader reader = null;
     String result = null;
