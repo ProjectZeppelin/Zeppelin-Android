@@ -61,6 +61,7 @@ public class GetRequest {
       Log.d(TAG, "Could not get result");
     }
     // return the data or null otherwise
+    Log.d(TAG, "get: " + result);
     return result;
   }
 }

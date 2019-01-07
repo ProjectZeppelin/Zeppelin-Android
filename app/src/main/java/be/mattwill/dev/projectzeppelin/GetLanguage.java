@@ -36,12 +36,16 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
 
   private int amountFinsihed =0;
   private int totalToLoad = 1;
+  private int AmountOfFirstToLoad = 20;// the first 5 webvie will load than the view will be shown
+  private int AmountLoadedOfFirst = 0; // the amount of the first loadable webviews
 
   // only draw our Webview if everything has loaded
   private class LoadingWebViewClient extends WebViewClient {
     private WeakReference<LinearLayout> mLayout;
-    LoadingWebViewClient(WeakReference<LinearLayout> layout){
+    private int mIndex;
+    LoadingWebViewClient(WeakReference<LinearLayout> layout, int index){
       mLayout = layout;
+      mIndex = index;
     }
 
     @Override
@@ -51,7 +55,13 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
 
     @Override
     public void onPageFinished(WebView view, String url) {
-      if(++amountFinsihed >= totalToLoad) {
+
+      if(mIndex <= AmountLoadedOfFirst)
+        AmountLoadedOfFirst++;
+
+      // show the first 5 webview or every webview this way the user can already watch
+      // the cheatsheet while the rest is loading
+      if(++amountFinsihed >= totalToLoad || AmountLoadedOfFirst >= AmountOfFirstToLoad) {
         mSpinner.get().setVisibility(View.GONE);
         mLayout.get().setVisibility(View.VISIBLE);
       }
@@ -62,20 +72,35 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
     @Override
     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
       super.onReceivedError(view, request, error);
-      mLayout.get().setVisibility(View.GONE);
+      //mLayout.get().setVisibility(View.GONE);
+      Log.i("WebviewError", "onReceivedError: " + error.getDescription());
+      showError(error.getDescription().toString());
     }
 
     @Override
     public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
       super.onReceivedHttpError(view, request, errorResponse);
-      mLayout.get().setVisibility(View.GONE);
+      //mLayout.get().setVisibility(View.GONE);
+      Log.i("WebviewError", "onReceivedHttpError: " + errorResponse.getReasonPhrase());
+      showError(errorResponse.getReasonPhrase());
     }
 
     @Override
     public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
       super.onReceivedSslError(view, handler, error);
-      mLayout.get().setVisibility(View.GONE);
+      //mLayout.get().setVisibility(View.GONE);
+      Log.i("WebviewError", "onReceivedSslError: " + error.getPrimaryError());
+      showError(error.getCertificate().toString());
     }
+
+    private void showError(String error){
+      mLayout.get().removeAllViews();
+      TextView view = new TextView(mActivity.get());
+      view.setTextSize(15);
+      view.setText("Error rendering: " + error);
+      mLayout.get().addView(view);
+    }
+
   }
 
 
@@ -134,7 +159,7 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
           TextView Title = new TextView(mActivity.get());
           TextView Subtitle = new TextView(mActivity.get());
           WebView Gist = new WebView(mActivity.get());
-          Gist.setWebViewClient(new LoadingWebViewClient(mLayout));
+          Gist.setWebViewClient(new LoadingWebViewClient(mLayout, i));
 
 
 
@@ -169,7 +194,6 @@ public class GetLanguage extends AsyncTask<String, Void, String> {
           mLayout.get().addView(Title);
           mLayout.get().addView(Subtitle);
           mLayout.get().addView(Gist);
-
 
         }
 
