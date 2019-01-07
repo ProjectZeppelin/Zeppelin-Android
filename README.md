@@ -1,4 +1,16 @@
-# PROJECT ZEPPELIN
+[![Project Zeppelin](https://raw.githubusercontent.com/MattZK/ProjectZeppelin/master/src/img/project-zeppelin-readme.png)](https://mattzk.github.io/ProjectZeppelin)
+
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+![Stage](https://img.shields.io/badge/Stage-Beta-orange.svg)
+![Version](https://img.shields.io/badge/Version-1.0-green.svg)
+![Required](https://img.shields.io/badge/Requires-backend-orange.svg)
+![Client](https://img.shields.io/badge/Client-Android-green.svg)
+# Project Zeppelin
+Android frontend for the project zeppelin app
+
+*Languages used:  JAVA, XML*
+
+
 
 ## Introduction
 
